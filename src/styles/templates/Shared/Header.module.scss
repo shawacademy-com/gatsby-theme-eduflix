@@ -1,0 +1,39 @@
+@import "../../variables.scss";
+
+.header {
+  width: 100%;
+  height: 70px;
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  transition: all 0.5s ease-in-out;
+  // background: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 50%);
+
+  &.scrolled {
+    background-color: $primary-bg-color;
+  }
+
+  .header_leftSection {
+    .brandLogo {
+      img {
+        // width: 200px;
+        height: 35px;
+
+        @include respond(mobile) {
+          width: 130px;
+          height: 25px;
+        }
+      }
+    }
+  }
+
+  .header_rightSection {
+    p {
+      cursor: pointer;
+    }
+  }
+}

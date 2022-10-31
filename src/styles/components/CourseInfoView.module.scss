@@ -1,0 +1,16 @@
+@import "../variables.scss";
+
+.courseInfoPage {
+  width: 100%;
+  background-color: $secondary-bg-color;
+
+  .courseInfoSection {
+    padding: 0 48px;
+    margin-top: 24px;
+
+    .courseDescription {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+}

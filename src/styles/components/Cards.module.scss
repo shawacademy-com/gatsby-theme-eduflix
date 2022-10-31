@@ -1,0 +1,103 @@
+@import "../variables.scss";
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  margin-top: -7em;
+
+  // .faculty {
+  //   font-size: 16px;
+  //   width: fit-content;
+  //   padding: 0.5rem 0;
+  // }
+
+  .faculty {
+    // @include fluid-type(0.88rem, 1.6rem);
+    font-size: 1.6rem;
+    margin-left: 3rem;
+    padding: 0.5rem 0;
+    width: fit-content;
+  }
+
+  .cardRow {
+    display: flex;
+    flex-direction: row;
+    padding: 3.2rem 6rem 10rem;
+    overflow-x: auto;
+    margin-top: -3rem;
+    margin-left: -3rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 14rem;
+  height: 9rem;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-right: 0.3rem;
+  transition: all 300ms ease;
+  z-index: 1;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.45);
+    box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.6), 0 2px 2px rgba(0, 0, 0, 0.5);
+    z-index: 5;
+
+    .cardPoster {
+      height: 85%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .cardInfo {
+      box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.6), 0 2px 2px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+    }
+
+  }
+
+  .cardPoster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .cardInfo {
+    min-height: fit-content;
+    background-color: #fff;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    display: none;
+    padding: 0.4rem 0.6rem;
+    font-size: 14px;
+
+    .actionRow {
+      display: flex;
+      justify-content: space-between;
+
+      .leftSection {
+        display: flex;
+        align-items: flex-end;
+        width: max-content;
+      }
+    }
+
+    .textDetails {
+      margin-top: 0.7rem;
+      padding: 0 0.5rem 0.6rem;
+      font-size: 12px;
+    }
+  }
+}

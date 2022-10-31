@@ -1,0 +1,134 @@
+@import "../variables.scss";
+
+.courseModuleViewContainer {
+  width: 100%;
+  margin-top: 24px;
+
+  .moduleViewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.2;
+
+    .moduleFilterContainer {
+      position: relative;
+      cursor: pointer;
+
+      .moduleFilterDefaultItem {
+        margin: 0;
+        background-color: $primary-bg-color;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 18px;
+        font-weight: 600;
+        // font-family: $primary-font;
+        line-height: 1;
+        width: 200px;
+        height: 35px;
+        padding: 9px 18px;
+        border-radius: 4px;
+        z-index: 8;
+        cursor: pointer;
+
+        &:global(.dropdown-toggle) {
+          border: 1px solid rgb(77, 77, 77);
+        }
+      }
+
+      .moduleFilterDropdown {
+        border-radius: 4px;
+        border: 1px solid rgb(77, 77, 77);
+        background-color: $primary-bg-color;
+        padding: 0;
+        transform: translate(0px, 48px);
+        width: 225px;
+        z-index: 2;
+
+        .moduleFilterDropdownItem {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.54;
+          letter-spacing: normal;
+          text-align: left;
+          // color: $card-title-color;
+          // border-bottom: solid 1px $border-color;
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          width: inherit;
+          overflow: hidden;
+
+          @include respond(mobile) {
+            padding: 10px 8px;
+          }
+
+          &:hover {
+            background-color: rgba(66, 66, 66, 0.2);
+          }
+
+          p {
+            margin: unset;
+          }
+        }
+
+        .moduleFilterDropdownItem:last-of-type {
+          border-bottom: unset;
+        }
+
+        @include respond(mobile) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .moduleLessonContent {
+    margin-top: 16px;
+    border-top: 1px solid rgb(64, 64, 64);
+    border-bottom: 1px solid rgb(64, 64, 64);
+    padding: 16px 0;
+
+    .lessonRow {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+
+      // &:not(:last-child) {
+      //   border-bottom:rgb(64, 64, 64)
+      // }
+
+      .lessonNumber {
+        font-size: 24px;
+      }
+
+      .lessonVideo {
+        width: 160px;
+        height: 90px;
+        border: 1px solid black;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .lessonInfo {
+        width: 825px;
+
+        h4 {
+          font-size: 16px;
+          margin-bottom: unset;
+        }
+
+        span {
+          font-size: 14px;
+        }
+      }
+
+      .lessonDuration {
+        font-size: 16px;
+      }
+    }
+  }
+}
