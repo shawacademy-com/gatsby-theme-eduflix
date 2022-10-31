@@ -5,10 +5,10 @@ import * as styles from '../../styles/templates/Shared/Header.module.scss';
 const Header:React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  window.onscroll = () => {
+  typeof window !== 'undefined' ? window.onscroll = () => {
     setIsScrolled(window.scrollY === 0 ? false : true);
     return () => (window.onscroll = null);
-  };
+  } : null;
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
