@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - aws s3 cp $S3_CONFIG_URI ./
         - yarn install
     build:
       commands:
