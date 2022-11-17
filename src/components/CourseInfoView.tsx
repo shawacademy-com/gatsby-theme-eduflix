@@ -9,8 +9,6 @@ interface Props {
 }
 
 const CourseInfoView:React.FC<Props> = ({courseData}) => {
-  console.log('course data ', courseData);
-
   return (
     <div className={styles.courseInfoPage}>
       <CourseBanner courseData={courseData} />

@@ -12,12 +12,37 @@
   //   padding: 0.5rem 0;
   // }
 
-  .faculty {
+  .facultyNameContainer {
     // @include fluid-type(0.88rem, 1.6rem);
-    font-size: 1.6rem;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
     margin-left: 3rem;
     padding: 0.5rem 0;
     width: fit-content;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover {
+      svg {
+        display: block;
+      }
+    }
+
+    p {
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin: unset;
+    }
+
+    svg {
+      display: none;
+      font-size: 24px;
+      font-weight: 500;
+      transition: all 0.8s ease-in;
+    }
   }
 
   .cardRow {
@@ -49,11 +74,13 @@
 
   &:hover {
     transform: scale(1.45);
+    // transition-delay: 0.5s;
     box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.6), 0 2px 2px rgba(0, 0, 0, 0.5);
-    z-index: 5;
+    z-index: 10;
 
     .cardPoster {
       height: 85%;
+      // transition-delay: 0.5s;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -63,6 +90,7 @@
       display: flex;
       flex-direction: column;
       height: fit-content;
+      transition-delay: 0.5s;
     }
 
   }
@@ -72,6 +100,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 12px;
+    transition: all 300ms ease;
   }
 
   .cardInfo {
@@ -80,8 +109,9 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     display: none;
-    padding: 0.4rem 0.6rem;
+    padding: 0.3rem 0.5rem;
     font-size: 14px;
+    transition: all 300ms ease-in-out;
 
     .actionRow {
       display: flex;
@@ -95,9 +125,9 @@
     }
 
     .textDetails {
-      margin-top: 0.7rem;
-      padding: 0 0.5rem 0.6rem;
-      font-size: 12px;
+      margin-top: 0.5rem;
+      padding: 0 0.4rem 0.5rem;
+      font-size: 11px;
     }
   }
 }

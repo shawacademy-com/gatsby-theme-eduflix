@@ -23,7 +23,7 @@ const FeaturedCourse:React.FC = () => {
         <div className={styles.buttonRow}>
           <Button label='Play' filled Icon={Play} />
           <Button label='More Info' Icon={Info}
-            onClick={() => navigate(`/courses/graphic-design/`)} />
+            onClick={() => navigate(`/course/graphic-design/`)} />
         </div>
       </div>
     </div>

@@ -1,0 +1,25 @@
+@import "../variables.scss";
+
+.categoryPageContainer {
+  width: 100%;
+  padding: 0 48px 60px;
+
+  .categoryItem {
+    width: 100%;
+    text-align: center;
+
+    h3 {
+      font-size: 45px;
+      padding: 72px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .courseCards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+  }
+}

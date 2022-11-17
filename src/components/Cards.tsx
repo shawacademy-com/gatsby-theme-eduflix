@@ -9,8 +9,6 @@ interface Props {
 }
 
 const Cards:React.FC<Props> = ({courseData}) => {
-  console.log('course data ', courseData);
-
   return (
     <div className={styles.card}>
       <img src={`${process.env.AssetsCDN}/course-images/en/${
@@ -22,9 +20,9 @@ const Cards:React.FC<Props> = ({courseData}) => {
             <Button Icon={Play} rounded filled />
             <Button Icon={Add} rounded />
           </div>
-          <div className={styles.rightSection}>
+          <div>
             <Button Icon={Down} rounded
-              onClick={() => navigate(`/courses/${courseData.courseslug}`)} />
+              onClick={() => navigate(`/course/${courseData.courseslug}`)} />
           </div>
         </div>
         <div className={styles.textDetails}>

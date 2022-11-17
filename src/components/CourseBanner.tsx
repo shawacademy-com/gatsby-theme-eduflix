@@ -7,8 +7,6 @@ interface Props {
 }
 
 const CourseBanner:React.FC<Props> = ({courseData}) => {
-  console.log('course data ', courseData);
-
   const navigateToWatchLessonPage = () => {
     navigate(`/watch/${courseData.modules[0].lessons[0].id}`);
   };

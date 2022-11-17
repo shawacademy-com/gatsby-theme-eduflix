@@ -17,15 +17,12 @@ const CourseModuleView:React.FC<Props> = ({moduleData}) => {
 
   const [currentModule, setCurrentModule] =
     useState(newModuleData[0].modulenumber);
-  console.log('current module ', currentModule);
-  console.log('module data ', newModuleData);
 
   const moduleFilteredLessons = useMemo(() => {
     return newModuleData.filter((module: any) => {
       return module.modulenumber === currentModule;
     });
   }, [newModuleData, currentModule]);
-  console.log('module filtered courses ', moduleFilteredLessons);
 
   return (
     <div className={styles.courseModuleViewContainer}>

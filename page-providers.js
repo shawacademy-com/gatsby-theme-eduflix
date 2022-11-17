@@ -86,87 +86,42 @@ class PageProvider {
     }
     return allBrandCoures;
   }
-}
 
-/**
- TODO:
-**/
-class HomePage extends PageProvider {
   /**
-   TODO:
-   @param {string} graphql
-  **/
-  constructor(graphql) {
-    super(graphql);
-  }
-  /**
-  * Returns an array of pages
-  * @param {string} query
-  * @return {Array} The array of pages
-  */
-  async pages(query) {
-    const result = await super.pages(`
-  {
-    allBrandWebsiteCoursecataloguepage {
-      edges {
-        node {
-          id
-          locale
-          url
-          pageslug
-          publish_details {
-            locale
-          }
+   *
+   *
+   * @param {*} pageResult
+   * @return {*}
+   * @memberof PageProvider
+   */
+  generateCategoryResults(pageResult) {
+    const allLocaleContent = pageResult ? pageResult.nodes: [];
+    const allCourses = [];
+    for (let i = 0; i < allLocaleContent.length; i++) {
+      const localeContent = allLocaleContent[i];
+      const courseCollections = localeContent.coursecollections;
+      if (localeContent.locale == localeContent.publish_details.locale) {
+        for (let j = 0; j < courseCollections.length; j++) {
+          const collection = courseCollections[j];
+          collection.locale = localeContent.locale;
+          const slugifiedLabel = courseCollections[j].label
+              .toLowerCase()
+              .replace(/[^\w ]+/g, '')
+              .replace(/ +/g, '-');
+          collection.slugifiedLabel = slugifiedLabel;
+          allCourses.push(collection);
         }
       }
     }
-    allBrandWebsiteCoursepages {
-      nodes {
-        courseslug
-      }
-    }
-  }
-  `);
-    const pages = result.data.allBrandWebsiteCoursecataloguepage;
-    const pageResult = pages ? pages.edges : [];
-    const newPageResult = [];
-    const coursePageQueryData = result.data.allBrandWebsiteCoursepages.nodes;
-    const p = require.resolve(`./src/templates/CourseCataloguePage.tsx`);
-    for (let index = 0; index < pageResult.length; index++) {
-      const s3KeyArray = [];
-      const currentPage = pageResult[index];
-      if (currentPage.node.locale ==
-        currentPage.node.publish_details.locale) {
-        coursePageQueryData.forEach((slug) => {
-          if (slug) {
-            const localizedCourseSlug = `${slug.courseslug}${
-              currentPage.node.locale === 'en' ? '' : `-${
-                currentPage.node.locale}`}`;
-            const courseImageS3Key = `course-images/${
-              currentPage.node.locale}/${
-              localizedCourseSlug}/website-square.png`;
-            s3KeyArray.push(courseImageS3Key);
-          }
-        },
-        );
-        currentPage.node.custom = {
-          s3KeyArray,
-        };
-        newPageResult.push(currentPage);
-      }
-    }
-    return {
-      'pageResult': newPageResult,
-      'errors': result.errors,
-      'componentPath': p,
-    };
+    return allCourses;
   }
 }
 
 /**
- TODO:
+ *
+ * Returns HomePage object
 **/
-class BrowseCollectionPage extends PageProvider {
+class HomePage extends PageProvider {
   /**
    TODO:
    @param {string} graphql
@@ -212,12 +167,9 @@ class BrowseCollectionPage extends PageProvider {
     const pageResult = [];
     for (let index=0; index < allBrandCollections.length; index ++) {
       const collection = allBrandCollections[index];
-      const category = collection.label.toLowerCase().
-          replace(/[^\w ]+/g, '').
-          replace(/ +/g, '-');
       collection.node = {
         locale: collection.locale,
-        url: '/' + category + '/',
+        url: '/',
         custom: {
           collection: JSON.stringify(collection),
         },
@@ -234,7 +186,7 @@ class BrowseCollectionPage extends PageProvider {
       }
       pageResult.push(collection);
     }
-    const p = require.resolve(`./src/templates/BrowseCollectionPage.tsx`);
+    const p = require.resolve(`./src/templates/HomePage.tsx`);
     return {
       'pageResult': pageResult,
       'errors': result.errors,
@@ -287,7 +239,7 @@ class CourseInfoPage extends PageProvider {
     const newPageResult = [];
     for (let index = 0; index < allBrandCoures.length; index++) {
       const course = allBrandCoures[index];
-      course.node.url = '/courses/' + course.node.courseslug + '/';
+      course.node.url = '/course/' + course.node.courseslug + '/';
       newPageResult.push(course);
     }
     const p = require.resolve(`./src/templates/CourseInfoPage.tsx`);
@@ -299,8 +251,85 @@ class CourseInfoPage extends PageProvider {
   }
 }
 
+/**
+ TODO:
+**/
+class CategoryPage extends PageProvider {
+  /**
+   TODO:
+   @param {string} graphql
+   @param {string} createPage
+  **/
+  constructor(graphql) {
+    super(graphql);
+  }
+
+  /**
+  * Returns an array of pages
+  * @param {string} query
+  * @return {Array} The array of pages
+  */
+  async pages(query) {
+    const result = await super.pages(`
+    {
+      allBrandEducationBrandcourses(
+        filter: {brandidentifier: {eq: "${process.env.BrandDomain}"},
+        publish_details: {locale: {eq: "en"}}}
+      ) {
+        nodes {
+          locale
+          publish_details {
+            locale
+          }
+          coursecollections {
+            label
+            description
+            courses {
+              faculty
+              coursename
+              courseslug
+              locale
+            }
+          }
+        }
+      }
+    }
+`);
+    const allLocaleResults = result.data.allBrandEducationBrandcourses;
+    const allBrandCourses = super.generateCategoryResults(allLocaleResults);
+    const newPageResult = [];
+    for (let index = 0; index < allBrandCourses.length; index++) {
+      const category = allBrandCourses[index];
+      category.node = {
+        locale: category.locale,
+        url: '/category/' + category.slugifiedLabel + '/',
+        custom: {
+          category: JSON.stringify(category),
+        },
+      };
+      // if (!index) {
+      //   const indexCategoryNode = Object.assign({}, category.node);
+      //   indexCategoryNode.url = '/category' +;
+      //   indexCollectionNode.custom = Object.assign({
+      //     indexRoute: true,
+      //   }, collection.node.custom);
+      //   pageResult.push({
+      //     node: indexCollectionNode,
+      //   });
+      // }
+      newPageResult.push(category);
+    }
+    const p = require.resolve(`./src/templates/CategoryPage.tsx`);
+    return {
+      'pageResult': newPageResult,
+      'errors': result.errors,
+      'componentPath': p,
+    };
+  }
+}
+
 module.exports = {
   HomePage,
-  BrowseCollectionPage,
   CourseInfoPage,
+  CategoryPage,
 };

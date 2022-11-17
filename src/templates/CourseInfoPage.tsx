@@ -9,7 +9,6 @@ interface Props {
 
 const CourseInfoPage:React.FC<Props> = ({data}) => {
   const courseData = data.brandEducationCourse;
-  console.log('course data ', courseData);
 
   return (
     <div>
