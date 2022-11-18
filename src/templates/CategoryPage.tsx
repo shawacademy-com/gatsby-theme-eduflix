@@ -8,7 +8,8 @@ const CategoryPage:React.FC = () => {
   const courseCollection = browseCourseCollection();
   const allCourseCollection =
     courseCollection?.brandEducationBrandcourses.coursecollections;
-  const category = window.location.pathname.split('/')[2];
+  const category = typeof window !== 'undefined' &&
+    window.location.pathname.split('/')[2];
   const filteredCourses = useMemo(() => {
     return allCourseCollection.filter((item: any) => {
       return item.label
