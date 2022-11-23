@@ -1,8 +1,10 @@
 import {navigate} from 'gatsby';
-import React, {Key} from 'react';
+import React from 'react';
 import * as styles from '../styles/components/Cards.module.scss';
 import {ExploreMore} from '../utils/icons';
 import Cards from './Cards';
+import {Course} from '../types/course.type';
+import {v4 as uuidv4} from 'uuid';
 
 interface Props {
   data: any,
@@ -20,9 +22,9 @@ const CourseList:React.FC<Props> = ({data}) => {
         <ExploreMore />
       </div>
       <div className={styles.cardRow}>
-        {data.courses.map((item: any, index: Key) => {
+        {data.courses.map((item: Course) => {
           return (
-            <Cards key={index} courseData={item} />
+            <Cards key={uuidv4()} courseData={item} />
           );
         })}
       </div>

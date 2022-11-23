@@ -1,5 +1,5 @@
 import {graphql} from 'gatsby';
-import React, {Key} from 'react';
+import React from 'react';
 import Footer from './Shared/Footer';
 import Header from './Shared/Header';
 import {browseCourseCollection} from './Shared/HomePageProvider';
@@ -7,6 +7,8 @@ import * as styles from '../styles/templates/HomePage.module.scss';
 import FeaturedCourse from '../components/FeaturedCourse';
 import CourseList from '../components/CourseList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {CourseCollection} from '../types/course.type';
+import {v4 as uuidv4} from 'uuid';
 
 interface Props {
   data: any;
@@ -23,10 +25,10 @@ const HomePage:React.FC<Props> = ({data}) => {
       <Header />
       <FeaturedCourse />
       <div className={styles.contentContainer}>
-        {allCourseCollection.map((item: any, index: Key) => {
+        {allCourseCollection.map((item: CourseCollection) => {
           return (
             <CourseList
-              key={index}
+              key={uuidv4()}
               data={item}
             />
           );

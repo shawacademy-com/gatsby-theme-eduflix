@@ -3,6 +3,7 @@ import Cards from '../components/Cards';
 import {browseCourseCollection} from './Shared/HomePageProvider';
 import {v4 as uuidv4} from 'uuid';
 import * as styles from '../styles/templates/CategoryPage.module.scss';
+import {CourseCollection, Course} from '../types/course.type';
 
 const CategoryPage:React.FC = () => {
   const courseCollection = browseCourseCollection();
@@ -21,11 +22,11 @@ const CategoryPage:React.FC = () => {
 
   return (
     <div className={styles.categoryPageContainer}>
-      {filteredCourses.map((course: any) => (
+      {filteredCourses.map((course: CourseCollection) => (
         <div className={styles.categoryItem} key={uuidv4()}>
           <h3>{course.label}</h3>
           <div className={styles.courseCards}>
-            {course.courses.map((data: any) => (
+            {course.courses.map((data: Course) => (
               <Cards key={uuidv4()} courseData={data} />
             ))}
           </div>

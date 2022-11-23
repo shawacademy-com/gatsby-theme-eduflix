@@ -7,7 +7,7 @@ interface Props {
   data: any,
 }
 
-const CourseInfoPage:React.FC<Props> = ({data}) => {
+const CoursePage:React.FC<Props> = ({data}) => {
   const courseData = data.brandEducationCourse;
 
   return (
@@ -18,10 +18,10 @@ const CourseInfoPage:React.FC<Props> = ({data}) => {
   );
 };
 
-export default CourseInfoPage;
+export default CoursePage;
 
 export const pageQuery = graphql`
-  query CourseInfoPageID($id: String) {
+  query CoursePageID($id: String) {
     brandEducationCourse(id: { eq: $id }) {
       id
       locale

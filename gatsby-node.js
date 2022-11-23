@@ -1,6 +1,6 @@
 const {PageGenerator} = require('./page-generator');
 const {HomePage} = require('./page-providers');
-const {CourseInfoPage} = require('./page-providers');
+const {CoursePage} = require('./page-providers');
 const {CategoryPage} = require('./page-providers');
 
 exports.createPages = async ({actions, graphql}) => {
@@ -11,10 +11,10 @@ exports.createPages = async ({actions, graphql}) => {
   const homePageConfiguration = await homePage.pages();
   await pageGenerator.generate(homePageConfiguration);
 
-  const learnerCourseInfoPage = new CourseInfoPage(graphql);
-  const learnerCourseInfoPageConfiguration =
-    await learnerCourseInfoPage.pages();
-  await pageGenerator.generate(learnerCourseInfoPageConfiguration);
+  const coursePage = new CoursePage(graphql);
+  const coursePageConfiguration =
+    await coursePage.pages();
+  await pageGenerator.generate(coursePageConfiguration);
 
   const categoryPage = new CategoryPage(graphql);
   const categoryPageConfiguration = await categoryPage.pages();

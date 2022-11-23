@@ -198,7 +198,7 @@ class HomePage extends PageProvider {
 /**
  TODO:
 **/
-class CourseInfoPage extends PageProvider {
+class CoursePage extends PageProvider {
   /**
    TODO:
    @param {string} graphql
@@ -242,7 +242,7 @@ class CourseInfoPage extends PageProvider {
       course.node.url = '/course/' + course.node.courseslug + '/';
       newPageResult.push(course);
     }
-    const p = require.resolve(`./src/templates/CourseInfoPage.tsx`);
+    const p = require.resolve(`./src/templates/CoursePage.tsx`);
     return {
       'pageResult': newPageResult,
       'errors': result.errors,
@@ -307,16 +307,6 @@ class CategoryPage extends PageProvider {
           category: JSON.stringify(category),
         },
       };
-      // if (!index) {
-      //   const indexCategoryNode = Object.assign({}, category.node);
-      //   indexCategoryNode.url = '/category' +;
-      //   indexCollectionNode.custom = Object.assign({
-      //     indexRoute: true,
-      //   }, collection.node.custom);
-      //   pageResult.push({
-      //     node: indexCollectionNode,
-      //   });
-      // }
       newPageResult.push(category);
     }
     const p = require.resolve(`./src/templates/CategoryPage.tsx`);
@@ -330,6 +320,6 @@ class CategoryPage extends PageProvider {
 
 module.exports = {
   HomePage,
-  CourseInfoPage,
+  CoursePage,
   CategoryPage,
 };
